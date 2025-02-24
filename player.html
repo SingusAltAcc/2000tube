@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2000Tube - Video Player</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="cool duck face.png">
+</head>
+<body>
+  <div class="retro-container">
+    <div class="header">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="cool duck face.png" alt="2000Tube Duck Logo" class="duck-logo">
+        <span class="logo-text">2000Tube</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search videos...">
+        <button onclick="window.location.href='index.html?search=' + encodeURIComponent(document.getElementById('searchInput').value.trim())">Search</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div id="playerContainer">
+        <div id="player"></div>
+        <div class="video-controls">
+          <button class="retro-button" id="playPauseButton" title="Play/Pause">▶</button>
+          <div class="progress-container">
+            <span class="timestamp" id="currentTime">0:00</span>
+            <div class="progress-bar">
+              <div id="loadedProgress"></div>
+              <div id="progressFill"></div>
+            </div>
+            <span class="timestamp" id="duration">0:00</span>
+          </div>
+          <div class="volume-control">
+            <button class="retro-button" id="muteButton" title="Mute">🔊</button>
+            <input type="range" id="volumeSlider" class="retro-slider" min="0" max="100" value="100">
+          </div>
+          <select id="qualitySelect" class="retro-select" title="Video Quality">
+            <option value="auto">Auto</option>
+            <option value="hd720">720p</option>
+            <option value="medium">480p</option>
+            <option value="small">360p</option>
+          </select>
+          <button class="retro-button" id="fullscreenButton" title="Fullscreen">⛶</button>
+        </div>
+      </div>
+
+      <div class="retro-tab-bar">
+        <div class="retro-tab active" data-tab="info">Info</div>
+        <div class="retro-tab" data-tab="comments">Comments</div>
+        <div class="retro-tab" data-tab="stats">Video Stats</div>
+      </div>
+
+      <div class="tab-content" id="infoTab">
+        <div class="video-info">
+          <h2 id="videoTitle">Loading...</h2>
+          <div class="video-metadata">
+            <span id="videoStats"></span>
+            <div class="video-actions">
+              <button id="likeButton" title="Like">👍 <span id="likeCount">0</span></button>
+              <button id="shareButton" title="Share">📤 Share</button>
+            </div>
+          </div>
+          <div class="channel-info">
+            <div id="channelName"></div>
+            <button id="subscribeButton">Subscribe</button>
+          </div>
+          <p id="videoDescription">Loading video description...</p>
+        </div>
+      </div>
+
+      <div class="tab-content" id="commentsTab" style="display: none;">
+        <div class="stats-window">
+          <div class="stats-title-bar">
+            <span>Comments</span>
+            <span class="close-button">×</span>
+          </div>
+          <div id="comments">
+            <p style="color: #808080;">Comments are loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="statsTab" style="display: none;">
+        <div class="stats-window">
+          <div class="stats-title-bar">
+            <span>Video Statistics</span>
+            <span class="close-button">×</span>
+          </div>
+          <div id="videoStats">
+            <p>Resolution: <span id="currentRes">Loading...</span></p>
+            <p>Connection Speed: <span id="connectionSpeed">Loading...</span></p>
+            <p>Buffer Health: <span id="bufferHealth">Loading...</span></p>
+            <p>Dropped Frames: <span id="droppedFrames">0</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="recommended-videos" id="recommendedVideos">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script type="module" src="player.js"></script>
+</body>
+</html>
